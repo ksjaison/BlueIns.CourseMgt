@@ -1,0 +1,54 @@
+﻿@using BlueIns.CourseMgt.Web.Models
+@model CourseDetailsViewModel
+
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div>
+    <h5>Delete Course Details</h5>
+    <hr />
+    <form asp-action="Delete">
+    <dl class="row">
+        <dt class = "col-sm-2" hidden="hidden">
+            @Html.DisplayNameFor(model => model.CourseId)
+        </dt>
+        <dd class = "col-sm-10" hidden="hidden">
+            @Html.DisplayFor(model => model.CourseId)
+        </dd>
+        <dt class = "col-sm-2">
+            Course Name
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CourseName)
+        </dd>
+        <dt class = "col-sm-2">
+           Teacher Name
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeacherName)
+        </dd>       
+        <dt class = "col-sm-2">
+           Start Date
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+           End Date
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class = "col-sm-2">
+           No.of Seats
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NoofSeats)
+        </dd>
+    </dl>    
+        <input type="hidden" asp-for="CourseId"/>
+        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you to delete this Record?')"/> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
