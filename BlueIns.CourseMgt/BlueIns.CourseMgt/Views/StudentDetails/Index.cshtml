@@ -1,0 +1,91 @@
+﻿@using BlueIns.CourseMgt.Web.Models
+@model IEnumerable<StudentDetailsViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h5>Students Lists</h5>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address3)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model!=null){
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurName)
+            </td>
+            @*@Html.DisplayFor(modelItem => item.Gender)*@
+                @if(item.Gender == "M"){
+            <td>
+                Male
+            </td>
+                    }
+                    else
+                    {
+             <td>
+                Female
+             </td>
+                    }
+                    <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address3)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                 @*<a asp-action="RegCourse" asp-route-id="@item.Id">Map Course</a>*@
+                 @Html.ActionLink("Map Course","Index","RegCourse",new { Id = item.Id})
+                @*<input type="button" value="Map Course" onclick="@("window.location.href='" + @Url.Action("RegDetails", "RegCourse") + "'");" />*@
+            </td>
+        </tr>
+}
+}
+    </tbody>
+</table>

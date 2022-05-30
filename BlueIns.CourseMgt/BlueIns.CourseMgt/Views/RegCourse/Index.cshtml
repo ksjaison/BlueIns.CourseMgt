@@ -1,0 +1,86 @@
+﻿@using BlueIns.CourseMgt.Web.Models
+@*@model IEnumerable<RegDetailsViewModel>*@
+@*@model Tuple<MainRegDetailsViewModel,RegDetailsViewModel>*@
+@model Tuple<RegDetailsViewModel,IEnumerable<RegDetailsViewModel>>
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h5>Course Regitsration</h5>
+<hr />
+<div class="row">
+<form asp-action="Create">
+<div class="form-group">
+                <table cellpadding=3>
+                    <tr>
+                            <td>
+                                <input type="hidden" asp-for="Item1.Student.Id"/>
+                          <label class="control-label">Student Name: Jaison</label>                
+                    </td>
+                    <td>
+                        <label class="control-label">SurName: KS</label>
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+
+<table class="table">
+   
+    <tbody>
+
+        @if(Model!=null){
+@foreach (var item in Model.Item2){
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.CourseName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RegId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.RegId">Delete</a>
+            </td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        No Corses mapped for the student.
+                    </td>
+                </tr>
+               
+            }
+
+    </tbody>
+</table>
+
+
+<table>
+    <tr>
+        <td>
+            <select asp-for="Item1.Course.CourseId" class="form-control" autocomplete="off">
+                <option value="">-- Select --</option>
+            @foreach (var course in ViewData["Courses"] as Dictionary<int, string>)
+            {       
+                    <option value=@course.Key>@course.Value</option>
+            }                
+            </select>
+
+        </td>
+        <td>
+             <input type="submit" value="Map Course" class="btn btn-primary" /> |
+                @Html.ActionLink("Back to Student list","Index","StudentDetails")
+        </td>
+    </tr>
+</table>
+
+
+</form>
+</div>
+
